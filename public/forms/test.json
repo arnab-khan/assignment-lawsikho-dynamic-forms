@@ -1,0 +1,177 @@
+[
+    {
+        "label": "Email",
+        "formControlName": "email",
+        "type": "input",
+        "sequence": 1,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Email is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email address"
+            }
+        }
+    },
+    {
+        "label": "Password",
+        "formControlName": "password",
+        "type": "input",
+        "sequence": 2,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Password is required"
+            },
+            "pattern": {
+                "value": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
+                "errorMessage": "Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number"
+            }
+        }
+    },
+    {
+        "label": "Remember Me",
+        "formControlName": "rememberMe",
+        "type": "input",
+        "sequence": 3,
+        "validation": {
+            "mandatory": {
+                "value": false,
+                "errorMessage": ""
+            }
+        }
+    },
+    {
+        "label": "Name",
+        "formControlName": "name",
+        "type": "input",
+        "sequence": 4,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Name is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z\\s]{2,50}$",
+                "errorMessage": "Name must be between 2 and 50 characters and contain only letters and spaces"
+            }
+        }
+    },
+    {
+        "label": "Confirm Password",
+        "formControlName": "confirmPassword",
+        "type": "input",
+        "sequence": 5,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Confirming your password is required"
+            },
+            "pattern": {
+                "value": "",
+                "errorMessage": "Passwords must match"
+            }
+        }
+    },
+    {
+        "label": "Phone Number",
+        "formControlName": "phoneNumber",
+        "type": "input",
+        "sequence": 6,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Phone number is required"
+            },
+            "pattern": {
+                "value": "^[0-9]{10}$",
+                "errorMessage": "Phone number must be 10 digits"
+            }
+        }
+    },
+    {
+        "label": "Profile Picture",
+        "formControlName": "profilePicture",
+        "type": "input",
+        "sequence": 7,
+        "validation": {
+            "mandatory": {
+                "value": false,
+                "errorMessage": ""
+            }
+        }
+    },
+    {
+        "label": "City",
+        "formControlName": "city",
+        "type": "input",
+        "sequence": 9,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "City is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z\\s]{2,50}$",
+                "errorMessage": "City must be between 2 and 50 characters and contain only letters and spaces"
+            }
+        }
+    },
+    {
+        "label": "State",
+        "formControlName": "state",
+        "type": "input",
+        "sequence": 10,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "State is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z\\s]{2,50}$",
+                "errorMessage": "State must be between 2 and 50 characters and contain only letters and spaces"
+            }
+        }
+    },
+    {
+        "label": "Pincode",
+        "formControlName": "pincode",
+        "type": "input",
+        "sequence": 11,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Pincode is required"
+            },
+            "pattern": {
+                "value": "^[0-9]{6}$",
+                "errorMessage": "Pincode must be 6 digits"
+            }
+        }
+    },
+    {
+        "label": "Country",
+        "formControlName": "country",
+        "type": "select",
+        "options": [
+            "Country 1",
+            "Country 2",
+            "Country 3",
+            "Country 4",
+            "Country 5"
+        ],
+        "sequence": 12,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Country is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z\\s]{2,50}$",
+                "errorMessage": "Country must be between 2 and 50 characters and contain only letters and spaces"
+            }
+        }
+    }
+]

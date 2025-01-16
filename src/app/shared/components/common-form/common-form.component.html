@@ -1,0 +1,51 @@
+@if (formGroup) {
+<form [formGroup]="formGroup" (ngSubmit)="submit()">
+    @for (fieldInformation of formInformation; track $index) {
+    <ul class="ps-0 mb-0">
+        <li class="list-unstyled mt-3">
+            @let fieldControll = formGroup.get(fieldInformation.formControlName);
+            @let fieldType = fieldInformation.type;
+            <label [for]="fieldInformation.formControlName">
+                {{fieldInformation.label}}
+            </label>
+
+            <!-- start selection of field type -->
+            @if (fieldControll && isFormControl(fieldControll)) {
+            <div>
+                @if (fieldType=='input'||fieldType=='email'||fieldType=='password') {
+                <input [type]="fieldType" [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
+                }
+                @else if (fieldType=='select') {
+                <select [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
+                    <option [value]="null" disabled>Select a value</option>
+                    @for (option of fieldInformation?.options||[]; track $index) {
+                    <option [value]="option">
+                        {{option}}
+                    </option>
+                    }
+                </select>
+                }
+            </div>
+            }
+            <!-- end selection of field type -->
+
+            <!-- Start validetion -->
+            @if (fieldControll?.invalid) {
+            <div>
+                @if (fieldControll?.errors?.['required']) {
+                {{fieldInformation?.validation?.mandatory?.errorMessage}}
+                }
+                @if (fieldControll?.errors?.['pattern']) {
+                {{fieldInformation?.validation?.pattern?.errorMessage}}
+                }
+            </div>
+            }
+            <!-- End validetion -->
+        </li>
+    </ul>
+    }
+    <button type="submit" class="d-block mx-auto mt-5 bg-primary text-white border-0 rounded-2 px-5 py-3">
+        Submit
+    </button>
+</form>
+}

@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'assignment-lawsikho-dynamic-forms';
+  menuItems = [
+    {
+      label: 'Login',
+      path: 'login'
+    },
+    {
+      label: 'Registration',
+      path: 'registration'
+    },
+    {
+      label: 'User Details',
+      path: 'user-details'
+    }
+  ];
 }
