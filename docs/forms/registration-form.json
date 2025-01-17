@@ -1,0 +1,82 @@
+[
+    {
+        "label": "Name",
+        "formControlName": "name",
+        "type": "input",
+        "sequence": 1,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Name is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z\\s]{2,50}$",
+                "errorMessage": "Name must be between 2 and 50 characters and contain only letters and spaces"
+            }
+        }
+    },
+    {
+        "label": "Email",
+        "formControlName": "email",
+        "type": "input",
+        "sequence": 2,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Email is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email address"
+            }
+        }
+    },
+    {
+        "label": "Password",
+        "formControlName": "password",
+        "type": "password",
+        "sequence": 3,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Password is required"
+            },
+            "pattern": {
+                "value": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
+                "errorMessage": "Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number"
+            }
+        }
+    },
+    {
+        "label": "Confirm Password",
+        "formControlName": "confirmPassword",
+        "type": "password",
+        "sequence": 4,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Confirming your password is required"
+            },
+            "passwordMismatch": {
+                "value": true,
+                "errorMessage": "Password and confirm password do not match."
+            }
+        }
+    },
+    {
+        "label": "Phone Number",
+        "formControlName": "phoneNumber",
+        "type": "input",
+        "sequence": 5,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Phone number is required"
+            },
+            "pattern": {
+                "value": "^[0-9]{10}$",
+                "errorMessage": "Phone number must be 10 digits"
+            }
+        }
+    }
+]
