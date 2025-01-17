@@ -1,14 +1,18 @@
-<header class="container">
-  <ul class="row row-cols-auto justify-content-between menu-items">
-    @for (menuItem of menuItems; track $index) {
-    <li class="list-unstyled">
-      <a [routerLink]="menuItems[$index].path" class="text-decoration-none">
-        {{menuItems[$index].label}}
-      </a>
-    </li>
-    }
-  </ul>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<div class="position-relative">
+  <header class="py-3 bg-body-tertiary position-sticky top-0">
+    <nav class="container">
+      <ul class="row row-cols-auto justify-content-between menu-items mb-0 ps-0">
+        @for (menuItem of menuItems; track $index) {
+        <li class="list-unstyled">
+          <a [routerLink]="menuItems[$index].path" class="text-decoration-none">
+            {{menuItems[$index].label}}
+          </a>
+        </li>
+        }
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

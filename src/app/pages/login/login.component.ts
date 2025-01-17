@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit {
   }
 
   getFormInformation() {
-    this.apisService.getFormInformation('test').subscribe({
+    this.apisService.getFormInformation('login').subscribe({
       next: (data) => {
-        console.log('form information', data);
+        // console.log('form information', data);
         this.formInformation = data;
       },
       error: (error) => {

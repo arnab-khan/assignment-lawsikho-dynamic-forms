@@ -1,59 +1,38 @@
-# AssignmentLawsikhoDynamicForms
+# Dynamic Form Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.1.
+This project implements a dynamic form system with three separate features: **Login**, **Registration**, and **User Details** forms. Each form is dynamically generated from its corresponding JSON configuration. The forms have mandatory fields, optional fields, and validations, ensuring data integrity and user experience.
 
-## Development server
+---
 
-To start a local development server, run:
+## Features
+1. **Login Form**:
+    - Fields:
+        - **Email** (Mandatory) - Valid email format required.
+        - **Password** (Mandatory) - Strong password format required.
+        - **Remember Me** (Optional) - Checkbox field.
+    - Validations:
+        - Email must follow a valid format (e.g., `example@domain.com`).
+        - Password must meet complexity requirements (uppercase, lowercase, digits, minimum 8 characters).
 
-```bash
-ng serve
-```
+2. **Registration Form**:
+    - Fields:
+        - **Name** (Mandatory) - Only letters and spaces, between 2-50 characters.
+        - **Email** (Mandatory) - Valid email format required.
+        - **Password** (Mandatory) - Strong password format required.
+        - **Confirm Password** (Mandatory) - Must match the password.
+        - **Phone Number** (Mandatory) - Exactly 10 numeric digits.
+    - Validations:
+        - Ensure `Password` matches `Confirm Password`.
+        - Phone number must be a valid 10-digit number.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+3. **User Details Form**:
+    - Fields:
+        - **Profile Picture** (Optional) - File upload field.
+        - **Address** (Mandatory) - Standard input field (additionally implied but not in the base JSON).
+        - **City** (Mandatory) - Letters and spaces only, 2-50 characters.
+        - **State** (Mandatory) - Letters and spaces only, 2-50 characters.
+        - **Pincode** (Mandatory) - Exactly 6 numeric digits.
+        - **Country** (Mandatory) - Dropdown selection field.
+    - Validations:
+        - Country selection is mandatory.
+        - Pincode must consist of exactly 6 digits.

@@ -1,0 +1,46 @@
+[
+    {
+        "label": "Email",
+        "formControlName": "email",
+        "type": "input",
+        "sequence": 1,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Email is required"
+            },
+            "pattern": {
+                "value": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+                "errorMessage": "Please enter a valid email address"
+            }
+        }
+    },
+    {
+        "label": "Password",
+        "formControlName": "password",
+        "type": "password",
+        "sequence": 2,
+        "validation": {
+            "mandatory": {
+                "value": true,
+                "errorMessage": "Password is required"
+            },
+            "pattern": {
+                "value": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
+                "errorMessage": "Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number"
+            }
+        }
+    },
+    {
+        "label": "Remember Me",
+        "formControlName": "rememberMe",
+        "type": "checkbox",
+        "sequence": 3,
+        "validation": {
+            "mandatory": {
+                "value": false,
+                "errorMessage": ""
+            }
+        }
+    }
+]

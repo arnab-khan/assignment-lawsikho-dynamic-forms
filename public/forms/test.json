@@ -2,7 +2,7 @@
     {
         "label": "Email",
         "formControlName": "email",
-        "type": "input",
+        "type": "email",
         "sequence": 1,
         "validation": {
             "mandatory": {
@@ -82,7 +82,7 @@
     {
         "label": "Phone Number",
         "formControlName": "phoneNumber",
-        "type": "input",
+        "type": "tel",
         "sequence": 6,
         "validation": {
             "mandatory": {
