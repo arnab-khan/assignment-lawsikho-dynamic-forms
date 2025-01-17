@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "baseHref": "/github-repositories-name/",
+            "baseHref": "/assignment-lawsikho-dynamic-forms/",
             "outputPath": {
               "base": "docs",
               "browser": ""
