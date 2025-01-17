@@ -1,19 +1,32 @@
 @if (formGroup) {
 <form [formGroup]="formGroup" (ngSubmit)="submit()">
-    <ul class="ps-0 mb-0 row row-cols-1 row-cols-md-2">
+    <ul class="ps-0 mb-0">
         @for (fieldInformation of formInformation; track $index) {
         <li class="list-unstyled mt-3"><!-- Each field -->
-            @let fieldControll = formGroup.get(fieldInformation.formControlName);
+
+            <!-- start variables -->
+            @let formControlName=fieldInformation.formControlName;
+            @let fieldControll = formGroup.get(formControlName);
             @let fieldType = fieldInformation.type;
-            <label [for]="fieldInformation.formControlName">
+            <!-- end variables -->
+
+            <!-- start label -->
+            @if (fieldType!='checkbox') {
+            <label [for]="formControlName">
                 {{fieldInformation.label}}
             </label>
+            }
+            <!-- end label -->
 
             <!-- start selection of field type -->
             @if (fieldControll && isFormControl(fieldControll)) {
             <div class="mt-2">
-                @if (fieldType=='input'||fieldType=='email'||fieldType=='password') {
+                @if (fieldType=='input'||fieldType=='email'||fieldType=='tel') {
                 <input [type]="fieldType" [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
+                }
+                @else if (fieldType=='password') {
+                <input type="password" [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2"
+                    (input)="updateOtherPasserWordField(formControlName)">
                 }
                 @else if (fieldType=='select') {
                 <select [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
@@ -25,8 +38,20 @@
                     }
                 </select>
                 }
+                @else if (fieldType=='checkbox') {
+                <div class="d-flex row-cols-auto align-items-center">
+                    <input type="checkbox" (input)="upload($event,fieldControll)" class="flex-shrink-0">
+                    <label [for]="fieldInformation.formControlName" class="ms-2">
+                        {{fieldInformation.label}}
+                    </label>
+                </div>
+                }
                 @else if (fieldType=='file') {
-                <input type="file" [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
+                <input type="file" (input)="upload($event,fieldControll)" class="w-100 px-3 py-2 rounded-2">
+                @let fileUrl=fieldControll?.value?.fileUrl;
+                @if (fileUrl) { <!-- Display uploaded profile picture -->
+                <img [src]="fileUrl" alt="Profile Picture" class="mw-100 display-profile-picture">
+                }
                 }
             </div>
             }
@@ -34,20 +59,26 @@
 
             <!-- Start validetion -->
             @if (fieldControll?.invalid) {
-            <div class="mt-2">
-                @if (fieldControll?.errors?.['required']) {
-                <span>
+            <div class="pt-1 text-danger">
+                @if (fieldControll?.errors?.['required'] && clickedSubmitButton) {
+                <span class="d-block mt-1">
                     {{fieldInformation?.validation?.mandatory?.errorMessage}}
                 </span>
                 }
                 @if (fieldControll?.errors?.['pattern']) {
-                <span>
+                <span class="d-block mt-1">
                     {{fieldInformation?.validation?.pattern?.errorMessage}}
+                </span>
+                }
+                @if (fieldControll?.errors?.['passwordMismatch'] && clickedSubmitButton) {
+                <span class="d-block mt-1">
+                    {{fieldInformation?.validation?.passwordMismatch?.errorMessage}}
                 </span>
                 }
             </div>
             }
             <!-- End validetion -->
+
         </li>
         }
     </ul>

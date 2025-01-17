@@ -18,7 +18,7 @@
     {
         "label": "Password",
         "formControlName": "password",
-        "type": "input",
+        "type": "password",
         "sequence": 2,
         "validation": {
             "mandatory": {
@@ -28,13 +28,17 @@
             "pattern": {
                 "value": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$",
                 "errorMessage": "Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number"
+            },
+            "passwordMismatch": {
+                "value": true,
+                "errorMessage": "Password and confirm password do not match."
             }
         }
     },
     {
         "label": "Remember Me",
         "formControlName": "rememberMe",
-        "type": "input",
+        "type": "checkbox",
         "sequence": 3,
         "validation": {
             "mandatory": {
@@ -62,16 +66,16 @@
     {
         "label": "Confirm Password",
         "formControlName": "confirmPassword",
-        "type": "input",
+        "type": "password",
         "sequence": 5,
         "validation": {
             "mandatory": {
                 "value": true,
                 "errorMessage": "Confirming your password is required"
             },
-            "pattern": {
-                "value": "",
-                "errorMessage": "Passwords must match"
+            "passwordMismatch": {
+                "value": true,
+                "errorMessage": "Password and confirm password do not match."
             }
         }
     },
@@ -167,10 +171,6 @@
             "mandatory": {
                 "value": true,
                 "errorMessage": "Country is required"
-            },
-            "pattern": {
-                "value": "^[a-zA-Z\\s]{2,50}$",
-                "errorMessage": "Country must be between 2 and 50 characters and contain only letters and spaces"
             }
         }
     }

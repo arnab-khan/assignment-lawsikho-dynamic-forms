@@ -14,6 +14,11 @@ export class CommonFormComponent implements OnChanges {
   @Input() formInformation: FormInformation[] = [];
 
   formGroup: FormGroup | undefined;
+  passwordFieldsControll = [
+    'password',
+    'confirmPassword'
+  ];
+  clickedSubmitButton = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,13 +35,15 @@ export class CommonFormComponent implements OnChanges {
     const fields = this.utilsService.ascendingSort(this.formInformation, 'sequence').reduce((addedValue: { [x: string]: any }, fieldInformation: FormInformation) => {
       const isMandatory = fieldInformation?.validation?.mandatory?.value;
       const pattern = fieldInformation?.validation?.pattern?.value;
+      const passwordMismatch = fieldInformation?.validation?.passwordMismatch?.value;
       return {
         ...addedValue, ...{
           [fieldInformation.formControlName]: [
             null,
             [
               isMandatory && Validators.required,
-              pattern && Validators.pattern(pattern)
+              pattern && Validators.pattern(pattern),
+              passwordMismatch && this.utilsService.passwordMatchValidator(this.passwordFieldsControll[0], this.passwordFieldsControll[1])
             ].filter(validetion => validetion)
           ]
         }
@@ -46,27 +53,33 @@ export class CommonFormComponent implements OnChanges {
   }
 
   submit() {
-    console.log('Form value', this.formGroup?.value);
-
+    this.clickedSubmitButton=true;
+    if (this.formGroup?.status == 'VALID') {
+      console.log('Form value', this.formGroup?.value);
+    } else {
+      window.alert('Invalid form')
+    }
   }
 
   isFormControl(control: AbstractControl | null): control is FormControl {
     return control instanceof FormControl;
   }
 
-  upload(event: { target: { files: Blob[]; }; }) {
-    const file = event.target.files[0];
-    this.getImageSrc(file);
-    const formData = new FormData();
-    formData.append('file', file);
-
+  upload(event: Event, control: AbstractControl) {
+    const input = event.target as HTMLInputElement;
+    if (input?.files?.length) {
+      const file = input.files[0];
+      this.utilsService.createFileData(file).then(value => {
+        control.patchValue(value);
+      });
+    }
   }
-  getImageSrc(file: Blob) {
-    const reader = new FileReader();
-    reader.onload = (e: any) => {
-      // this.uploadImageSrc = e.target.result;
-    };
-    reader.readAsDataURL(file);  //it read the content of the file and trigger the onload event handler once the reading operation is complete
+
+  updateOtherPasserWordField(formControlName: string) {
+    const otherFieldName = this.passwordFieldsControll.find(element => element != formControlName);
+    if (otherFieldName) {
+      this.formGroup?.get(otherFieldName)?.updateValueAndValidity();
+    }
   }
 
 }
