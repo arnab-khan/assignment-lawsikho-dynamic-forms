@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApisService } from '../../services/apis.service';
+import { ApisService } from '../../shared/services/apis.service';
 import { CommonFormComponent } from '../../shared/components/common-form/common-form.component';
 import { FormInformation } from '../../interfaces/form-information';
 

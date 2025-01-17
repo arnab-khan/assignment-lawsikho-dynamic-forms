@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { FormInformation } from '../interfaces/form-information';
+import { FormInformation } from '../../interfaces/form-information';
 
 @Injectable({
   providedIn: 'root'

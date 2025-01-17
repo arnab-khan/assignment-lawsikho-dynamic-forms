@@ -94,7 +94,7 @@
     {
         "label": "Profile Picture",
         "formControlName": "profilePicture",
-        "type": "input",
+        "type": "file",
         "sequence": 7,
         "validation": {
             "mandatory": {

@@ -1,8 +1,8 @@
 @if (formGroup) {
 <form [formGroup]="formGroup" (ngSubmit)="submit()">
-    @for (fieldInformation of formInformation; track $index) {
-    <ul class="ps-0 mb-0">
-        <li class="list-unstyled mt-3">
+    <ul class="ps-0 mb-0 row row-cols-1 row-cols-md-2">
+        @for (fieldInformation of formInformation; track $index) {
+        <li class="list-unstyled mt-3"><!-- Each field -->
             @let fieldControll = formGroup.get(fieldInformation.formControlName);
             @let fieldType = fieldInformation.type;
             <label [for]="fieldInformation.formControlName">
@@ -11,7 +11,7 @@
 
             <!-- start selection of field type -->
             @if (fieldControll && isFormControl(fieldControll)) {
-            <div>
+            <div class="mt-2">
                 @if (fieldType=='input'||fieldType=='email'||fieldType=='password') {
                 <input [type]="fieldType" [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
                 }
@@ -25,25 +25,32 @@
                     }
                 </select>
                 }
+                @else if (fieldType=='file') {
+                <input type="file" [formControl]="fieldControll" class="w-100 px-3 py-2 rounded-2">
+                }
             </div>
             }
             <!-- end selection of field type -->
 
             <!-- Start validetion -->
             @if (fieldControll?.invalid) {
-            <div>
+            <div class="mt-2">
                 @if (fieldControll?.errors?.['required']) {
-                {{fieldInformation?.validation?.mandatory?.errorMessage}}
+                <span>
+                    {{fieldInformation?.validation?.mandatory?.errorMessage}}
+                </span>
                 }
                 @if (fieldControll?.errors?.['pattern']) {
-                {{fieldInformation?.validation?.pattern?.errorMessage}}
+                <span>
+                    {{fieldInformation?.validation?.pattern?.errorMessage}}
+                </span>
                 }
             </div>
             }
             <!-- End validetion -->
         </li>
+        }
     </ul>
-    }
     <button type="submit" class="d-block mx-auto mt-5 bg-primary text-white border-0 rounded-2 px-5 py-3">
         Submit
     </button>

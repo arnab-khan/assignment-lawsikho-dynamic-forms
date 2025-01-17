@@ -1,7 +1,7 @@
 export interface FormInformation {
     label: string;
     formControlName: string;
-    type: 'input' | 'email' | 'select' | 'password',
+    type: 'input' | 'email' | 'select' | 'password' | 'file',
     options?: string[];
     sequence: number;
     validation?: FormInformationValidation;

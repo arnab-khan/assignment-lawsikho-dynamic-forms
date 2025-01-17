@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormInformation } from '../../../interfaces/form-information';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-common-form',
@@ -16,6 +17,7 @@ export class CommonFormComponent implements OnChanges {
 
   constructor(
     private formBuilder: FormBuilder,
+    private utilsService: UtilsService
   ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -25,7 +27,7 @@ export class CommonFormComponent implements OnChanges {
   }
 
   createForm() {
-    const fields = this.formInformation.reduce((addedValue: { [x: string]: any }, fieldInformation: FormInformation) => {
+    const fields = this.utilsService.ascendingSort(this.formInformation, 'sequence').reduce((addedValue: { [x: string]: any }, fieldInformation: FormInformation) => {
       const isMandatory = fieldInformation?.validation?.mandatory?.value;
       const pattern = fieldInformation?.validation?.pattern?.value;
       return {
@@ -35,7 +37,7 @@ export class CommonFormComponent implements OnChanges {
             [
               isMandatory && Validators.required,
               pattern && Validators.pattern(pattern)
-            ].filter(validetion=>validetion)
+            ].filter(validetion => validetion)
           ]
         }
       };
@@ -44,11 +46,27 @@ export class CommonFormComponent implements OnChanges {
   }
 
   submit() {
+    console.log('Form value', this.formGroup?.value);
 
   }
 
   isFormControl(control: AbstractControl | null): control is FormControl {
     return control instanceof FormControl;
+  }
+
+  upload(event: { target: { files: Blob[]; }; }) {
+    const file = event.target.files[0];
+    this.getImageSrc(file);
+    const formData = new FormData();
+    formData.append('file', file);
+
+  }
+  getImageSrc(file: Blob) {
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      // this.uploadImageSrc = e.target.result;
+    };
+    reader.readAsDataURL(file);  //it read the content of the file and trigger the onload event handler once the reading operation is complete
   }
 
 }
